@@ -8,17 +8,30 @@ import (
 // as it saves you creating the "Hello, " string instance
 // every time Hello is called.
 const englishHelloPrefix = "Hello, "
+const spanishHelloPrefix = "Hola, "
+const frenchHelloPrefix = "Bonjour, "
 
-// Hello accepts a string, an returns the string "Hello, " + name
-// defaults to return "Hello, World" if empty string given
-func Hello(name string) string {
+// Hello prints a greeting message
+func Hello(name string, language string) string {
 	if name == "" {
 		name = "World"
 	}
 
-	return englishHelloPrefix + name
+	return greetingPrefix(language) + name
+}
+
+func greetingPrefix(language string) (prefix string) {
+	switch language {
+	case "French":
+		prefix = frenchHelloPrefix
+	case "Spanish":
+		prefix = spanishHelloPrefix
+	default:
+		prefix = englishHelloPrefix
+	}
+	return
 }
 
 func main() {
-	fmt.Println(Hello("World"))
+	fmt.Println(Hello("World", ""))
 }
